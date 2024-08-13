@@ -30,6 +30,9 @@ const services = {
       type: "MySQL",
       icon:"https://static-00.iconduck.com/assets.00/database-mysql-icon-1849x2048-81vgyimd.png"
     },
+    { id: "Service D", port: 8083, namespace: "default", cluster: "cluster-3", invocations: 100, successRate: 50, type: "Redis", icon: "https://static-00.iconduck.com/assets.00/redis-icon-2048x1749-do6trbyo.png" },
+    { id: "Service E", port: 8084, namespace: "default", cluster: "cluster-2", invocations: 400, successRate: 20, type: "Kafka", icon: "https://e7.pngegg.com/pngimages/630/547/png-clipart-kafka-vertical-logo-tech-companies-thumbnail.png" },
+    { id: "Service F", port: 8085, namespace: "default", cluster: "cluster-1", invocations: 250, successRate: 34, type: "OpenAI", icon: "https://static-00.iconduck.com/assets.00/openai-icon-2021x2048-4rpe5x7n.png" },
   ],
   links: [
     {
@@ -50,6 +53,10 @@ const services = {
       invocations: 200,
       latency: "100ms",
     },
+    { source: "Service C", target: "Service D", invocations: 200, latency: "40ms" },
+    { source: "Service D", target: "Service E", invocations: 100, latency: "50ms" },
+    { source: "Service E", target: "Service F", invocations: 300, latency: "25ms" },
+    { source: "Service F", target: "Service A", invocations: 100, latency: "15ms" },
   ],
 };
 

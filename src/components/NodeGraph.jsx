@@ -157,10 +157,23 @@ function NodeGraph({ data }) {
       latency: form.latency.value,
     };
 
-    setGraphData((prevData) => ({
-      nodes: [...prevData.nodes, newNode],
-      links: [...prevData.links, newLink],
-    }));
+    setGraphData((prevData) => {
+        const updatedNodes = [...prevData.nodes, newNode];
+        const updatedLinks = [...prevData.links, newLink];
+  
+        const sourceNodeExists = updatedNodes.some(node => node.id === newLink.source);
+        const targetNodeExists = updatedNodes.some(node => node.id === newLink.target);
+  
+        if (sourceNodeExists && targetNodeExists) {
+          return {
+            nodes: updatedNodes,
+            links: updatedLinks,
+          };
+        } else {
+          alert("Error: The source or target node specified in the link does not exist.");
+          return prevData;
+        }
+      });
 
     form.reset();
   };
